@@ -3,8 +3,6 @@ package router
 import (
 	"net/http"
 
-	"github.com/a-h/templ"
-	"github.com/classcharts-oss/server/pkg/frontend"
 	data2 "github.com/classcharts-oss/server/pkg/student/data"
 	"github.com/classcharts-oss/server/pkg/student/user"
 	"github.com/classcharts-oss/server/pkg/test"
@@ -27,8 +25,6 @@ func CreateMuxRouter() *mux.Router {
 	//CreateParentReportAbsenceRoutes(router.PathPrefix("/apiv2parentreportabsence").Subrouter())
 
 	CreateTestRouter(router.PathPrefix("/test").Subrouter())
-
-	CreateFrontendRoutes(router)
 
 	return router
 }
@@ -101,12 +97,6 @@ func CreateTestRouter(router *mux.Router) *mux.Router {
 	restrictedTest.HandleFunc("/newannouncement", data2.CreateAnnouncementHandler).Methods(http.MethodPost)
 
 	restrictedTest.HandleFunc("/newactivity", data2.CreateActivityHandler).Methods(http.MethodPost)
-
-	return router
-}
-
-func CreateFrontendRoutes(router *mux.Router) *mux.Router {
-	router.Handle("/", templ.Handler(frontend.Hello("NERD")))
 
 	return router
 }
