@@ -1,11 +1,13 @@
 package router
 
 import (
-	"github.com/CommunityCharts/CCServerMock/pkg/frontend"
-	data2 "github.com/CommunityCharts/CCServerMock/pkg/student/data"
-	"github.com/CommunityCharts/CCServerMock/pkg/student/user"
-	"github.com/CommunityCharts/CCServerMock/pkg/test"
 	"net/http"
+
+	"github.com/a-h/templ"
+	"github.com/classcharts-oss/server/pkg/frontend"
+	data2 "github.com/classcharts-oss/server/pkg/student/data"
+	"github.com/classcharts-oss/server/pkg/student/user"
+	"github.com/classcharts-oss/server/pkg/test"
 
 	"github.com/gorilla/mux"
 )
@@ -18,9 +20,6 @@ func CreateMuxRouter() *mux.Router {
 	router.Use(ErrorHandler)
 	router.Use(RequestHandler)
 
-	router.PathPrefix("/public").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir(frontend.Dir("public")))))
-	DoFrontendStuff(router)
-
 	CreateStudentRoutes(router.PathPrefix("/apiv2student").Subrouter(), true)
 	CreateStudentV1Routes(router.PathPrefix("/student").Subrouter())
 
@@ -28,6 +27,8 @@ func CreateMuxRouter() *mux.Router {
 	//CreateParentReportAbsenceRoutes(router.PathPrefix("/apiv2parentreportabsence").Subrouter())
 
 	CreateTestRouter(router.PathPrefix("/test").Subrouter())
+
+	CreateFrontendRoutes(router)
 
 	return router
 }
@@ -104,7 +105,8 @@ func CreateTestRouter(router *mux.Router) *mux.Router {
 	return router
 }
 
-func DoFrontendStuff(router *mux.Router) {
-	router.HandleFunc("/", frontend.HomePageHandler).Methods(http.MethodGet)
-	router.HandleFunc("/announcements", frontend.AnnouncementsPageHandler).Methods(http.MethodGet)
+func CreateFrontendRoutes(router *mux.Router) *mux.Router {
+	router.Handle("/", templ.Handler(frontend.Hello("NERD")))
+
+	return router
 }

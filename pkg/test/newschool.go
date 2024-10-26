@@ -6,7 +6,7 @@ import (
 
 	"github.com/CommunityCharts/CCModels/school"
 	"github.com/CommunityCharts/CCModels/shared"
-	"github.com/CommunityCharts/CCServerMock/pkg/db"
+	"github.com/classcharts-oss/server/pkg/db"
 )
 
 func CreateSchoolHandler(w http.ResponseWriter, r *http.Request) {

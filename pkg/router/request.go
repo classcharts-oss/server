@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/CommunityCharts/CCModels/shared"
-	"github.com/CommunityCharts/CCServerMock/pkg/db"
+	"github.com/classcharts-oss/server/pkg/db"
 	"github.com/golang-jwt/jwt"
 )
 

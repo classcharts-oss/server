@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/CommunityCharts/CCServerMock/pkg/db"
-	"github.com/CommunityCharts/CCServerMock/pkg/router"
+	"github.com/classcharts-oss/server/pkg/db"
+	"github.com/classcharts-oss/server/pkg/router"
 	muxHandlers "github.com/gorilla/handlers"
 )
 
@@ -16,7 +16,7 @@ func main() {
 	r := router.CreateMuxRouter()
 
 	headersOk := muxHandlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
-	originsOk := muxHandlers.AllowedOrigins([]string{"http://localhost:3000"})
+	originsOk := muxHandlers.AllowedOrigins([]string{"*"})
 	methodsOk := muxHandlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"})
 
 	handler := muxHandlers.CORS(headersOk, originsOk, methodsOk)(r)

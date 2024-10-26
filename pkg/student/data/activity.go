@@ -1,11 +1,12 @@
 package data
 
 import (
-	"github.com/CommunityCharts/CCServerMock/pkg/db"
-	"github.com/CommunityCharts/CCServerMock/pkg/util"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/classcharts-oss/server/pkg/db"
+	"github.com/classcharts-oss/server/pkg/util"
 
 	"github.com/CommunityCharts/CCModels/shared"
 )
